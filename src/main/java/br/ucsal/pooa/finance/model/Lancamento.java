@@ -1,6 +1,15 @@
 package br.ucsal.pooa.finance.model;
 
 	import java.math.BigDecimal;
+	
+/**
+ * Model Anemico
+ * 	
+ * @author edsonmm
+ *
+ */
+	
+	
 
 	public class Lancamento {
 		
@@ -17,7 +26,41 @@ package br.ucsal.pooa.finance.model;
 			this.valor = valor;
 			this.descricao = descricao;
 		}
-		
 
+		@Override
+		
+		public String toString() {
+			StringBuilder builder = new StringBuilder();
+			builder.append("Lancamento [");
+			if (tipo != null) {
+				builder.append("tipo=");
+				builder.append(tipo);
+				builder.append(", ");
+			}
+			if (valor != null) {
+				builder.append("valor=");
+				builder.append(valor);
+				builder.append(", ");
+			}
+			if (descricao != null) {
+				builder.append("descricao=");
+				builder.append(descricao);
+			}
+			builder.append("]");
+			return builder.toString();
+		}
+
+		public String getTipo() {
+			return tipo;
+		}
+
+		public BigDecimal getValor() {
+			return valor;
+		}
+
+		public String getDescricao() {
+			return descricao;
+		}
+		
 	}
 

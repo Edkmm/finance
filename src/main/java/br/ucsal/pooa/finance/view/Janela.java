@@ -11,23 +11,64 @@ public class Janela {
 	private Scanner terminal = new Scanner(System.in);
 	List<Lancamento> lista;
 	
-	public Janela() {
-		ini();
+	public Janela(List<Lancamento> lista) {
+		this.lista = lista;
+		init();
 	}
 	
-	public void ini() {
+	public void init() {
 		String op;
 		do {
+			System.out.println("MENU");
+			System.out.println("1-CADASTRAR");
+			System.out.println("2-LISTAR");
+			System.out.println("3-SALDO");
+			System.out.println("S-SAIR");
+			System.out.println("OPCAO: ");
 			op = terminal.nextLine();
-		} while (op.equals(op;)
+			
+		} while (
+				!(op.equals("1") ||
+				op.equals("2") ||
+				op.equals("3") ||
+				op.equalsIgnoreCase("S")) 
+				);
+		
+		switch(op) {
+			case "1":
+				cadastrar();
+				break;
+			case "2":
+				listar();
+				break;
+			case "3":
+				saldo();
+				break;
+		default:
+			System.exit(0);
+			break;
+		}
 	}
 	
+	public void saldo() {
+		BigDecimal saldo = BigDecimal.ZERO;
+		for (Lancamento lancamento : lista) {
+			if(lancamento.getTipo().equals("DESPESA")) {
+				saldo = saldo.subtract(lancamento.getValor());
+			} else {
+				saldo = saldo.add(lancamento.getValor());
+			}
+		}
+		System.out.println(saldo.toPlainString());
+		init();
+	}
 
 	public void listar() {
 		// lista
 		for (Lancamento lancamento : lista) {
 			System.out.println(lancamento);
 		}
+		init();
 	}
 
 	public void cadastrar() {
@@ -44,7 +85,7 @@ public class Janela {
 		} 
 		} while ( !(tipo.equals("DESPESA") || tipo.equals("RECEITA")));
 		
-		System.out.print("Digite a Descrição["+tipo+"]:");
+		System.out.print("Digite a Descricao["+tipo+"]:");
 		String descricao = terminal.nextLine();
 		if (descricao.isEmpty()) {
 			descricao = tipo;
@@ -55,7 +96,8 @@ public class Janela {
 		BigDecimal amount = new BigDecimal(valor);
 		
 		Lancamento lancamento = new Lancamento(tipo, amount, descricao);
-		lista.add(null);
+		lista.add(lancamento);
+		init();
 	}
 
 }

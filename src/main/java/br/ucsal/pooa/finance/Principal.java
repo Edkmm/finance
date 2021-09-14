@@ -10,6 +10,8 @@ import org.javamoney.moneta.FastMoney;
 import org.javamoney.moneta.Money;
 
 import br.ucsal.pooa.finance.model.Lancamento;
+import br.ucsal.pooa.finance.persistencia.LancamentoDAO;
+import br.ucsal.pooa.finance.view.Janela;
 
 public class Principal {
 
@@ -18,8 +20,8 @@ public class Principal {
 		//M V C
 		//
 		
-		new Lancamento(Lancamento.DESPESA, new BigDecimal("1_000"), "Escola");
-		
+		LancamentoDAO dao = new LancamentoDAO();
+		Janela janela = new Janela(dao.listar());
 	}
-
+ 
 }
